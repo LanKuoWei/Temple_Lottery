@@ -73,7 +73,7 @@ body {
     bottom: 0;
     left: 0;
     width: 110px;
-    height: 240px;     /* 拉高籤筒本體 */
+    height: 230px;     /* 拉高籤筒本體 */
     background: linear-gradient(to right, #b8860b, #d4af37, #b8860b);
     border: 3px solid #ffffff; /* 範例圖的白色顯眼邊框 */
     border-radius: 12px 12px 35px 35px; /* 頂部微圓角，底部大圓角，完美還原 */
@@ -96,7 +96,7 @@ body {
 /* 眾多籤頂群：固定在籤筒內部，並露出頂端 */
 .stick-tops-group {
     position: absolute;
-    top: -10px;        /* 讓籤枝只露出頂端 10px，完美隱置於筒內 */
+    top: -15px;        /* 讓籤枝只露出頂端 10px，完美隱置於筒內 */
     left: 15px;
     width: 85px;
     height: 30px;
