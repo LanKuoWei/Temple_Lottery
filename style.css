@@ -30,7 +30,6 @@ body {
 
 .temple-header {
     text-align: center;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.4); /* 1畫素、實線、帶有透明度的金色 */
     padding-bottom: 12px;
 }
 
