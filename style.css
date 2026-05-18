@@ -9,13 +9,16 @@ body {
     align-items: center;
     min-height: 100vh;
     color: #fff;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .temple-container {
     width: 100%;
     max-width: 420px;
-    height: 92vh;
+    /* 修改：刪除原本的 height: 92vh; 改為下方這三行 */
+    min-height: 85vh;       /* 給予彈性的最小高度 */
+    margin: 10px auto;      /* 讓網頁在上下左右都留下一點點安全的空隙 */
+    padding: 20px 24px;
     background: linear-gradient(135deg, #7a0010 0%, #3a0007 100%);
     border: 3px solid #d4af37;
     border-radius: 16px;
