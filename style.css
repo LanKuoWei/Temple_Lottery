@@ -123,7 +123,7 @@ body {
     bottom: 30px; 
     left: 50%;
     transform: translateX(-50%); /* 精確居中 */
-    width: 12px;
+    width: 16px;
     height: 180px;
     background: linear-gradient(#ffdf65, #e5a93c);
     border: 1px solid #b77f1e;
