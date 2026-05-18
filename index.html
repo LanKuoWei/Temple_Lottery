@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寺廟線上抽籤系統</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="temple-container">
+        <header class="temple-header">
+            <h1>靈籤祈福</h1>
+            <p>誠心求籤，有求必應</p>
+        </header>
+
+        <div class="main-stage">
+            <div id="cylinder-wrapper" class="cylinder-wrapper">
+                
+                <div class="stick-tops-group">
+                    <div class="stick-top"></div>
+                    <div class="stick-top"></div>
+                    <div class="stick-top"></div>
+                    <div class="stick-top"></div>
+                    <div class="stick-top"></div>
+                    <div class="stick-top"></div>
+                    <div class="stick-top"></div>
+                    <div class="stick-top"></div>
+                </div>
+
+                <div id="drawn-stick" class="single-stick">
+                    <div class="stick-text">福</div>
+                </div>
+
+                <div class="cylinder-body">
+                    <span class="cylinder-text">籤筒</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="action-area">
+            <button id="draw-btn" class="temple-btn">點擊祈福抽籤</button>
+        </div>
+
+        <div id="result-modal" class="modal">
+            <div class="modal-content">
+                <h2>抽籤結果</h2>
+                <div class="fortune-card">
+                    <div class="card-title">第</div>
+                    <div id="fortune-number" class="card-number">--</div>
+                    <div class="card-title">籤</div>
+                </div>
+                <button id="reset-btn" class="temple-btn reset-btn">重置籤筒</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

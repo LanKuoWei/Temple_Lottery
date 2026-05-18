@@ -1,0 +1,279 @@
+/* 全域手機適配 */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #151515;
+    font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+    overflow: hidden;
+}
+
+.temple-container {
+    width: 100%;
+    max-width: 420px;
+    height: 92vh;
+    background: linear-gradient(135deg, #7a0010 0%, #3a0007 100%);
+    border: 3px solid #d4af37;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.temple-header {
+    text-align: center;
+    border-bottom: 2px dashed #d4af37;
+    padding-bottom: 12px;
+}
+
+.temple-header h1 {
+    color: #d4af37;
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: 6px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.temple-header p {
+    color: #f0e68c;
+    margin: 6px 0 0 0;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+/* 核心舞台：負責垂直與水平置中 */
+.main-stage {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* 籤筒總動態容器：所有元件的共同錨點 */
+.cylinder-wrapper {
+    position: relative;
+    width: 120px;      
+    height: 250px; 
+}
+
+/* 籤筒本體：蓋在最上層 (z-index: 3) */
+.cylinder-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 110px;
+    height: 240px;     /* 拉高籤筒本體 */
+    background: linear-gradient(to right, #b8860b, #d4af37, #b8860b);
+    border: 3px solid #ffffff; /* 範例圖的白色顯眼邊框 */
+    border-radius: 12px 12px 35px 35px; /* 頂部微圓角，底部大圓角，完美還原 */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.cylinder-text {
+    color: #5a0007;
+    font-size: 24px;
+    font-weight: bold;
+    writing-mode: vertical-lr;
+    letter-spacing: 8px;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.3);
+}
+
+/* 眾多籤頂群：固定在籤筒內部，並露出頂端 */
+.stick-tops-group {
+    position: absolute;
+    top: -10px;        /* 讓籤枝只露出頂端 10px，完美隱置於筒內 */
+    left: 15px;
+    width: 85px;
+    height: 30px;
+    display: flex;
+    justify-content: space-around; /* 讓籤枝在筒內均勻分佈 */
+    align-items: flex-start;
+    z-index: 2;
+}
+
+.stick-top {
+    width: 8px;
+    height: 45px;
+    background: linear-gradient(#ffe680, #d4af37);
+    border: 1px solid #966f1c;
+    border-radius: 4px 4px 0 0;
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.4);
+}
+
+/* 豐富交叉感：調整部分籤頂高度，看起來更自然 */
+.stick-top:nth-child(even) { height: 52px; }
+.stick-top:nth-child(3n) { height: 40px; }
+
+/* 抽出那支單籤：平時完美隱藏在筒內 (z-index: 1) */
+.single-stick {
+    position: absolute;
+    bottom: 30px; 
+    left: 50%;
+    transform: translateX(-50%); /* 精確居中 */
+    width: 12px;
+    height: 180px;
+    background: linear-gradient(#ffdf65, #e5a93c);
+    border: 1px solid #b77f1e;
+    border-radius: 4px;
+    z-index: 1; 
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 10px;
+    box-sizing: border-box;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+}
+
+.stick-text {
+    color: #cc0000;
+    font-size: 10px;       /* 稍微放大字體，讓福字更清晰 */
+    font-weight: bold;
+    font-family: 'Kaiti', 'STKaiti', '華康楷書體', serif; /* 改用楷書/襯線體，更有廟宇傳統感 */
+    line-height: 1;
+}
+
+/* 飛出動畫狀態（由 JS 控制引入） */
+.single-stick.fly-up {
+    opacity: 1;
+    z-index: 4; /* 飛出後超越筒身，呈現在最前端 */
+    transform: translateX(-50%) translateY(-140px); /* 向上垂直發射 */
+}
+
+/* 籤筒搖晃動畫 */
+.shake-animation {
+    animation: templeShake 0.13s ease-in-out infinite;
+}
+
+@keyframes templeShake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-3px, -1px) rotate(-2deg); }
+    50% { transform: translate(2px, 1px) rotate(3deg); }
+    75% { transform: translate(-1px, 2px) rotate(-1deg); }
+    100% { transform: translate(2px, -2px) rotate(1deg); }
+}
+
+/* 按鈕美化 */
+.action-area {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.temple-btn {
+    background: linear-gradient(#f3d97d, #d4af37);
+    color: #4a0005;
+    border: 1px solid #ffffff;
+    padding: 14px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    letter-spacing: 2px;
+    transition: all 0.2s;
+}
+
+.temple-btn:active {
+    transform: scale(0.96);
+}
+
+.temple-btn:disabled {
+    background: #666;
+    color: #aaa;
+    border-color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* 彈出視窗 */
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 10;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: #fdfaf2;
+    color: #333;
+    width: 75%;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    border: 3px double #d4af37;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.modal-content h2 {
+    margin: 0 0 15px 0;
+    color: #7a0010;
+    letter-spacing: 2px;
+}
+
+.fortune-card {
+    border: 2px solid #7a0010;
+    width: 140px;          /* 稍微加寬，確保三位數（如108）不會擠壓變形 */
+    margin: 0 auto 25px auto;
+    padding: 20px 10px;
+    background: #fffdf7;   /* 改為更柔和的仿古宣紙色 */
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px rgba(122, 0, 16, 0.1); /* 淡淡的內陰影提升質感 */
+}
+
+.card-title {
+    font-size: 16px;
+    color: #555;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-family: 'Kaiti', 'STKaiti', '華康楷書體', serif;
+}
+
+.card-number {
+    font-size: 56px;       /* 放大數字，使其成為絕對視覺焦點 */
+    font-weight: 700;
+    color: #cc0000;
+    margin: 10px 0;
+    
+    /* 核心修改：優先使用極具古典與毛筆風情的字型，若手機沒內建則優雅降級 */
+    font-family: 'BiauKai', 'Kaiti', 'STKaiti', '華康楷書體', 'Georgia', 'Times New Roman', serif;
+    
+    letter-spacing: -1px;  /* 稍微縮小字距，讓二到三位數的比例更緊湊好看 */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15); /* 加上極輕微的陰影，讓數字更立體 */
+    display: inline-block;
+    line-height: 1;
+}
+
+.reset-btn {
+    background: linear-gradient(#990014, #66000d);
+    color: #fff;
+    font-size: 15px;
+    padding: 10px 30px;
+    border-color: #d4af37;
+}
